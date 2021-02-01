@@ -1,5 +1,50 @@
+import csv
+
 # Create a class to hold a city location. Call the class "City". It should have
 # fields for name, lat and lon (representing latitude and longitude).
+
+
+
+"""
+Syntax from Tuesday's project 
+
+class Waypoint(LatLon):
+  def __init__(self, name, lat=0, lon=0):
+    super().__init__(lat, lon)
+    self.name = name
+
+ def __str__(self):
+    return "<Waypoint '{}' {:f},{}>".format(self.name, self.lat, self.lon)
+
+
+with open('src/foo.txt', "r") as f:
+    for line in f:
+        print(line)
+
+in windows we need to add src/ ... so src/cities.csv   ? 
+
+<__main__.City object at 0x000002C01E8F5AC0> w/ str method???
+def __str__(self):
+  return "<City '{}' {:f},{}>".format(self.name, self.lat, self.lon)
+
+def __repr__(self):
+        return '{name:'+self.name+', age:'+str(self.age)+ '}'
+ 
+
+"""
+
+class City:
+  def __init__(self, name, lat, lon):
+    self.name = name
+    self.lat = lat
+    self.lon = lon
+  
+  def __str__(self):
+    return "<City '{}' {:f},{}>".format(self.name, self.lat, self.lon)
+
+ 
+
+
 
 
 # We have a collection of US cities with population over 750,000 stored in the
@@ -21,14 +66,77 @@ def cityreader(cities=[]):
   # Ensure that the lat and lon valuse are all floats
   # For each city record, create a new City instance and add it to the 
   # `cities` list
-    
-    return cities
+
+  """
+  floats?  ... so with open(...) 
+
+  >>> import csv
+>>> with open('names.csv', newline='') as csvfile:
+...     reader = csv.DictReader(csvfile)
+...     for row in reader:
+...         print(row['first_name'], row['last_name'])
+
+
+next function  Usually you should call this as next(reader).
+
+File "c:/Users/Rohith Sachdeva/Desktop/Web32Gits/Sprint-Challenge--Intro-Python/src/cityreader/cityreader.py", line 89, in cityreader
+    city = City(line[0], float(line[2]), float(line[3]))
+ValueError: could not convert string to float: 'King'
+
+city,state_name,county_name,lat,lng,population,density,timezone,zips
+
+So we want 0, 3, 4   ... city, lat, lng
+  """
+
+  with open("src/cityreader/cities.csv", "r") as csvfile:
+    reader = csv.reader(csvfile)
+
+    next(reader)
+
+    for line in reader:
+      city = City(line[0], float(line[3]), float(line[4]))
+      cities.append(city)
+  
+  return cities
 
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
     print(c)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # STRETCH GOAL!
 #
